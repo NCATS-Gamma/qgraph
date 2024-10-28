@@ -24,6 +24,10 @@ module.exports = {
   overrides: [{
     files: ['*.jsx', '*.js'],
   }],
+  ignorePatterns: [
+    'useBiolinkModel.js',
+    'App.jsx',
+  ],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'max-len': 'off',

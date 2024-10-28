@@ -2,6 +2,7 @@ import {
   useEffect, useContext, useReducer, useMemo,
 } from 'react';
 
+import _ from 'lodash';
 import AlertContext from '~/context/alert';
 import queryBuilderUtils from '~/utils/queryBuilder';
 import queryGraphUtils from '~/utils/queryGraph';
@@ -65,6 +66,17 @@ function reducer(state, action) {
     case 'editPredicate': {
       const { id, predicates } = action.payload;
       state.message.message.query_graph.edges[id].predicates = predicates;
+      break;
+    }
+    case 'editQualifiers': {
+      const { id, qualifiers } = action.payload;
+      if (qualifiers.length !== 0) {
+        const qualifier_set = Object.entries(qualifiers).map(([name, value]) => ({
+          qualifier_type_id: `biolink:${_.snakeCase(name)}`,
+          qualifier_value: name === 'qualified predicate' ? `biolink:${_.snakeCase(value)}` : _.snakeCase(value),
+        }));
+        state.message.message.query_graph.edges[id].qualifier_constraints = [{ qualifier_set }];
+      }
       break;
     }
     case 'deleteEdge': {

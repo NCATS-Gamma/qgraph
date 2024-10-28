@@ -5,6 +5,28 @@ import getNodeCategoryColorMap from '~/utils/colors';
 
 const baseClass = 'biolink:NamedThing';
 
+const newClassNode = (name) => ({
+  name,
+  uuid: crypto.randomUUID(),
+  parent: null,
+  children: [],
+  mixinParents: [],
+  mixinChildren: [],
+  abstract: false,
+  mixin: false,
+});
+
+const newSlotNode = (name) => ({
+  name,
+  uuid: crypto.randomUUID(),
+  parent: null,
+  children: [],
+  mixinParents: [],
+  mixinChildren: [],
+  abstract: false,
+  mixin: false,
+});
+
 export default function useBiolinkModel() {
   const [biolinkModel, setBiolinkModel] = useState(null);
   const [concepts, setConcepts] = useState([]);
@@ -12,6 +34,8 @@ export default function useBiolinkModel() {
   const [predicates, setPredicates] = useState([]);
   const [ancestorsMap, setAncestorsMap] = useState([]);
   const colorMap = useCallback(getNodeCategoryColorMap(hierarchies), [hierarchies]);
+
+  const [model, setModel] = useState(null);
 
   function checkIfDescendantOfRelatedTo([name, slot]) {
     let currentName = name;
@@ -174,11 +198,123 @@ export default function useBiolinkModel() {
       setConcepts(allConcepts);
       setPredicates(allPredicates);
       setAncestorsMap(allAncestors);
+
+      const slotRootItems = [];
+      const slotLookup = new Map();
+      for (const [name, slot] of Object.entries(biolinkModel.slots)) {
+        if (!slotLookup.has(name)) {
+          slotLookup.set(name, newSlotNode(name));
+        }
+
+        const thisNode = slotLookup.get(name);
+
+        const parentName = slot.is_a ?? null;
+        if (!parentName) {
+          slotRootItems.push(thisNode);
+        } else {
+          if (!slotLookup.has(parentName)) {
+            slotLookup.set(parentName, newSlotNode(parentName));
+          }
+
+          const parentNode = slotLookup.get(parentName);
+          parentNode.children.push(thisNode);
+          thisNode.parent = parentNode;
+        }
+
+        thisNode.abstract = slot.abstract ?? false;
+        thisNode.mixin = slot.mixin ?? false;
+
+        // this node has mixins parents
+        const mixinNames = slot.mixins ?? null;
+        if (mixinNames) {
+          for (const mixinName of mixinNames) {
+            if (!slotLookup.has(mixinName)) {
+              slotLookup.set(mixinName, newSlotNode(mixinName));
+            }
+
+            const mixinNode = slotLookup.get(mixinName);
+            mixinNode.mixinChildren.push(thisNode);
+            thisNode.mixinParents.push(mixinNode);
+          }
+        }
+      }
+
+      const rootItems = [];
+      const lookup = new Map();
+      for (const [name, cls] of Object.entries(biolinkModel.classes)) {
+        if (!lookup.has(name)) {
+          lookup.set(name, newClassNode(name));
+        }
+
+        const thisNode = lookup.get(name);
+
+        const parentName = cls.is_a ?? null;
+        if (!parentName) {
+          rootItems.push(thisNode);
+        } else {
+          if (!lookup.has(parentName)) {
+            lookup.set(parentName, newClassNode(parentName));
+          }
+
+          const parentNode = lookup.get(parentName);
+          parentNode.children.push(thisNode);
+          thisNode.parent = parentNode;
+        }
+
+        thisNode.abstract = cls.abstract ?? false;
+        thisNode.mixin = cls.mixin ?? false;
+
+        if (cls.slot_usage) {
+          thisNode.slotUsage = cls.slot_usage;
+
+          thisNode.slotUsage.subject = cls.slot_usage.subject?.range
+            ? lookup.get(cls.slot_usage.subject?.range)
+            : undefined;
+
+          thisNode.slotUsage.object = cls.slot_usage.object?.range
+            ? lookup.get(cls.slot_usage.object?.range)
+            : undefined;
+
+          thisNode.slotUsage.predicate = cls.slot_usage.predicate
+            ?.subproperty_of
+            ? slotLookup.get(cls.slot_usage.predicate?.subproperty_of)
+            : undefined;
+        }
+
+        // this node has mixins parents
+        const mixinNames = cls.mixins ?? null;
+        if (mixinNames) {
+          for (const mixinName of mixinNames) {
+            if (!lookup.has(mixinName)) {
+              lookup.set(mixinName, newClassNode(mixinName));
+            }
+
+            const mixinNode = lookup.get(mixinName);
+            mixinNode.mixinChildren.push(thisNode);
+            thisNode.mixinParents.push(mixinNode);
+          }
+        }
+      }
+
+      setModel({
+        classes: {
+          treeRootNodes: rootItems,
+          lookup,
+        },
+        slots: {
+          treeRootNodes: slotRootItems,
+          lookup: slotLookup,
+        },
+        associations: lookup.get("association"),
+        qualifiers: slotLookup.get("qualifier"),
+        enums: biolinkModel.enums,
+      });
     }
   }, [biolinkModel]);
 
   return {
     setBiolinkModel,
+    model,
     concepts,
     hierarchies,
     predicates,

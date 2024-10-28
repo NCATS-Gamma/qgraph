@@ -7,9 +7,9 @@
 #queryTextEditor {
     width: 60%;
     padding: 20px;
-}
-#queryTextEditor > * {
-    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 #queryGraphEditor {
     width: 40%;
