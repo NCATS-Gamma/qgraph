@@ -9,6 +9,8 @@ const { handleAxiosError } = require('./utils');
 const services = require('./services');
 const external_apis = require('./external');
 
+const { getDrugDiseasePairs } = require('../explore/query/drug-disease');
+
 const samples = JSON.parse(fs.readFileSync(path.join(__dirname, './sample-query-cache.json')));
 
 router.use('/', external_apis);
@@ -58,10 +60,24 @@ router.route('/quick_answer')
     }
   });
 
-// router.route('/explore')
-//   .post(async (req, res) => {
-//     res.status(200).send(drugDiseasePairs);
-//   });
+router.route('/explore/drug-disease')
+  .post(async (req, res) => {
+    const { sort, filters, pagination } = req.body;
+
+    if (!pagination || !Number.isInteger(pagination.offset) || !Number.isInteger(pagination.limit)) return res.status(400).json({ error: 'Missing pagination' });
+    if (pagination.limit < 1 || pagination.offset < 0) return res.status(400).json({ error: 'Invalid limit or offset value' });
+
+    const limit = Math.min(pagination.limit, 500);
+    const { offset } = pagination;
+
+    try {
+      const results = await getDrugDiseasePairs({ sort, filters, pagination: { limit, offset } });
+      return res.status(200).json(results);
+    } catch (error) {
+      console.error('Error in explore page query:', error, req.body);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 router.route('/answer')
   .post(async (req, res) => {
