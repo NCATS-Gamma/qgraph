@@ -5,6 +5,13 @@ const run = async (db, sql, params) => new Promise((res, rej) => {
   });
 });
 
+const get = async (db, sql, params) => new Promise((res, rej) => {
+  db.get(sql, params, (err, row) => {
+    if (err) rej(err);
+    else res(row);
+  });
+});
+
 const all = async (db, sql, params) => new Promise((res, rej) => {
   db.all(sql, params, (err, rows) => {
     if (err) rej(err);
@@ -23,6 +30,7 @@ module.exports = {
    */
   db_p: {
     run,
+    get,
     all,
   },
   sql,
