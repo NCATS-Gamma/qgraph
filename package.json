@@ -88,7 +88,8 @@
     "react-widgets": "^4.5.0",
     "regenerator-runtime": "^0.13.7",
     "shortid": "^2.2.15",
-    "slugify": "^1.4.5"
+    "slugify": "^1.4.5",
+    "sqlite3": "^5.1.7"
   },
   "scripts": {
     "start": "webpack --mode=development --config webpack.dev.js && nodemon server.js",

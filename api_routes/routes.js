@@ -10,7 +10,6 @@ const services = require('./services');
 const external_apis = require('./external');
 
 const samples = JSON.parse(fs.readFileSync(path.join(__dirname, './sample-query-cache.json')));
-const drugDiseasePairs = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/drug-disease-mappings-subset.json'))).slice(0, 1000);
 
 router.use('/', external_apis);
 
@@ -59,10 +58,10 @@ router.route('/quick_answer')
     }
   });
 
-router.route('/explore')
-  .post(async (req, res) => {
-    res.status(200).send(drugDiseasePairs);
-  });
+// router.route('/explore')
+//   .post(async (req, res) => {
+//     res.status(200).send(drugDiseasePairs);
+//   });
 
 router.route('/answer')
   .post(async (req, res) => {

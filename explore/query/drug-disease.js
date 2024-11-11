@@ -18,7 +18,7 @@ const db = new sqlite3.Database(process.env.EXPLORE_DB);
         WHERE disease_name = "sneeze"
         ORDER BY score DESC
         LIMIT 5 OFFSET 5
-      `
+      `,
     );
   } catch (err) {
     console.error(rows);
