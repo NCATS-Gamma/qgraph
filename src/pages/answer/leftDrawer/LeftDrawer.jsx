@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -9,12 +8,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
-import { useAuth0 } from '@auth0/auth0-react';
-
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
 
@@ -31,11 +26,8 @@ import './leftDrawer.css';
  * @param {boolean} owned - does the user own this answer
  */
 export default function LeftDrawer({
-  onUpload, displayState, updateDisplayState, message,
-  saveAnswer, deleteAnswer, owned,
+  onUpload, displayState, updateDisplayState, message, deleteAnswer,
 }) {
-  const { isAuthenticated } = useAuth0();
-  const urlHasAnswerId = useRouteMatch('/answer/:answer_id');
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   function toggleDisplay(component, show) {
@@ -122,42 +114,6 @@ export default function LeftDrawer({
             type="file"
             onChange={(e) => onUpload(e)}
           />
-        </ListItem>
-        <ListItem
-          component="label"
-          button
-          disabled={!Object.keys(message).length || !!urlHasAnswerId || !isAuthenticated}
-          onClick={saveAnswer}
-        >
-          <ListItemIcon>
-            <IconButton
-              component="span"
-              style={{ fontSize: '18px' }}
-              title="Save Answer"
-              disableRipple
-            >
-              <CloudUploadIcon />
-            </IconButton>
-          </ListItemIcon>
-          <ListItemText primary="Save To Library" />
-        </ListItem>
-        <ListItem
-          component="label"
-          button
-          disabled={!urlHasAnswerId || !isAuthenticated || !owned}
-          onClick={() => setConfirmOpen(true)}
-        >
-          <ListItemIcon>
-            <IconButton
-              component="span"
-              style={{ fontSize: '18px' }}
-              title="Delete Answer"
-              disableRipple
-            >
-              <HighlightOffIcon />
-            </IconButton>
-          </ListItemIcon>
-          <ListItemText primary="Delete Answer" />
         </ListItem>
       </List>
       <ConfirmDialog
