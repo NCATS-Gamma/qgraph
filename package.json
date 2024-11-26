@@ -50,6 +50,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.2",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@tanstack/react-table": "^8.20.5",
     "ag-grid-community": "^23.2.1",
     "ag-grid-react": "^23.2.1",
     "axios": "^0.21.1",

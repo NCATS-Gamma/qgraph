@@ -129,12 +129,12 @@ export default function DrugDiseasePairs() {
                   pairs.map((pair, i) => (
                     <tr className={classes.hover} key={i}>
                       <td>
-                        {pair.disease.name}
-                        <Chip>{pair.disease.id}</Chip>
+                        {pair.disease_name}
+                        <Chip>{pair.disease_id}</Chip>
                       </td>
                       <td>
-                        {pair.drug.name}
-                        <Chip>{pair.drug.id}</Chip>
+                        {pair.drug_name}
+                        <Chip>{pair.drug_id}</Chip>
                       </td>
                       <td>
                         {
