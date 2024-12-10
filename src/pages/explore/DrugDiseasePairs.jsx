@@ -38,12 +38,12 @@ export default function DrugDiseasePairs() {
         query_graph: {
           nodes: {
             n0: {
-              name: pair.disease.name,
-              ids: [pair.disease.id],
+              name: pair.disease_name,
+              ids: [pair.disease_id],
             },
             n1: {
-              name: pair.drug.name,
-              ids: [pair.drug.id],
+              name: pair.drug_name,
+              ids: [pair.drug_id],
             },
           },
           edges: {
