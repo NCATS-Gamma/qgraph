@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -9,14 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
-import { useAuth0 } from '@auth0/auth0-react';
-
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
+import DownloadDialog from '~/components/DownloadDialog';
 
 import './leftDrawer.css';
 
@@ -31,28 +27,13 @@ import './leftDrawer.css';
  * @param {boolean} owned - does the user own this answer
  */
 export default function LeftDrawer({
-  onUpload, displayState, updateDisplayState, message,
-  saveAnswer, deleteAnswer, owned,
+  onUpload, displayState, updateDisplayState, message, deleteAnswer,
 }) {
-  const { isAuthenticated } = useAuth0();
-  const urlHasAnswerId = useRouteMatch('/answer/:answer_id');
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
   function toggleDisplay(component, show) {
     updateDisplayState({ type: 'toggle', payload: { component, show } });
-  }
-
-  /**
-   * Download the current message
-   */
-  async function download() {
-    const blob = new Blob([JSON.stringify({ message }, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.download = 'ROBOKOP_message.json';
-    a.href = window.URL.createObjectURL(blob);
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
   }
 
   return (
@@ -86,7 +67,7 @@ export default function LeftDrawer({
           component="label"
           button
           disabled={!Object.keys(message).length}
-          onClick={download}
+          onClick={() => { setDownloadOpen(true); }}
         >
           <ListItemIcon>
             <IconButton
@@ -123,42 +104,6 @@ export default function LeftDrawer({
             onChange={(e) => onUpload(e)}
           />
         </ListItem>
-        <ListItem
-          component="label"
-          button
-          disabled={!Object.keys(message).length || !!urlHasAnswerId || !isAuthenticated}
-          onClick={saveAnswer}
-        >
-          <ListItemIcon>
-            <IconButton
-              component="span"
-              style={{ fontSize: '18px' }}
-              title="Save Answer"
-              disableRipple
-            >
-              <CloudUploadIcon />
-            </IconButton>
-          </ListItemIcon>
-          <ListItemText primary="Save To Library" />
-        </ListItem>
-        <ListItem
-          component="label"
-          button
-          disabled={!urlHasAnswerId || !isAuthenticated || !owned}
-          onClick={() => setConfirmOpen(true)}
-        >
-          <ListItemIcon>
-            <IconButton
-              component="span"
-              style={{ fontSize: '18px' }}
-              title="Delete Answer"
-              disableRipple
-            >
-              <HighlightOffIcon />
-            </IconButton>
-          </ListItemIcon>
-          <ListItemText primary="Delete Answer" />
-        </ListItem>
       </List>
       <ConfirmDialog
         open={confirmOpen}
@@ -170,6 +115,11 @@ export default function LeftDrawer({
         content="Are you sure you want to delete this answer? This action cannot be undone."
         title="Confirm Answer Deletion"
         confirmText="Delete Answer"
+      />
+      <DownloadDialog
+        open={downloadOpen}
+        setOpen={setDownloadOpen}
+        message={message}
       />
     </Drawer>
   );
