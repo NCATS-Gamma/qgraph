@@ -12,6 +12,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
+import DownloadDialog from '~/components/DownloadDialog';
 
 import './leftDrawer.css';
 
@@ -29,22 +30,10 @@ export default function LeftDrawer({
   onUpload, displayState, updateDisplayState, message, deleteAnswer,
 }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
   function toggleDisplay(component, show) {
     updateDisplayState({ type: 'toggle', payload: { component, show } });
-  }
-
-  /**
-   * Download the current message
-   */
-  async function download() {
-    const blob = new Blob([JSON.stringify({ message }, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.download = 'ROBOKOP_message.json';
-    a.href = window.URL.createObjectURL(blob);
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
   }
 
   return (
@@ -78,7 +67,7 @@ export default function LeftDrawer({
           component="label"
           button
           disabled={!Object.keys(message).length}
-          onClick={download}
+          onClick={() => { setDownloadOpen(true); }}
         >
           <ListItemIcon>
             <IconButton
@@ -126,6 +115,11 @@ export default function LeftDrawer({
         content="Are you sure you want to delete this answer? This action cannot be undone."
         title="Confirm Answer Deletion"
         confirmText="Delete Answer"
+      />
+      <DownloadDialog
+        open={downloadOpen}
+        setOpen={setDownloadOpen}
+        message={message}
       />
     </Drawer>
   );
