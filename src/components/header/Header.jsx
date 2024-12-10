@@ -14,6 +14,7 @@ export default function Header() {
         <MuiLink href="/" style={{ cursor: 'pointer', margin: 0 }}><Logo height="48px" width="100%" style={{ paddingTop: '6px' }} /></MuiLink>
         <div className="grow" />
         <Link to="/">Question Builder</Link>
+        <Link to="/explore">Explore</Link>
         <Link to="/about">About</Link>
         <Link to="/guide">Guide</Link>
         <Link to="/tutorial">Tutorial</Link>
