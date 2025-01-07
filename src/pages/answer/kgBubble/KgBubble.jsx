@@ -3,12 +3,12 @@ import React, {
   useState, useEffect, useRef, useContext, useMemo,
 } from 'react';
 import * as d3 from 'd3';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Slider from '@material-ui/core/Slider';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
-import { List, ListItem, ListItemIcon } from '@material-ui/core';
-import { Brightness1 as Circle } from '@material-ui/icons';
+import { List, ListItem, ListItemIcon } from '@mui/core';
+import { Brightness1 as Circle } from '@mui/icons';
 import stringUtils from '~/utils/strings';
 import BiolinkContext from '~/context/biolink';
 import kgUtils from '~/utils/knowledgeGraph';

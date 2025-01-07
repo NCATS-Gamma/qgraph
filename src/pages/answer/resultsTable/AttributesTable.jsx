@@ -2,7 +2,7 @@ import {
   Box,
   styled,
   Table, TableBody, TableCell, TableHead, TableRow,
-} from '@material-ui/core';
+} from '@mui/core';
 import React from 'react';
 
 const headerStyles = { fontWeight: 'bold', backgroundColor: '#eee' };

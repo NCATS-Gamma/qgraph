@@ -1,6 +1,6 @@
 import React, { useMemo, useContext, useEffect } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@mui/lab/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 import BiolinkContext from '~/context/biolink';
 import QueryBuilderContext from '~/context/queryBuilder';

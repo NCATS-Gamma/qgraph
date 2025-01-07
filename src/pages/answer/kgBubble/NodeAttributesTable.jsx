@@ -6,7 +6,7 @@ import {
   TableCell,
   TableRow,
   styled,
-} from '@material-ui/core';
+} from '@mui/core';
 
 const StyledTableBody = styled(TableBody)(() => ({
   '& .MuiTableRow-root:last-of-type .MuiTableCell-root': {

@@ -3,7 +3,7 @@ import React, {
   useState, useEffect, useRef, useContext,
 } from 'react';
 import * as d3 from 'd3';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 
 import BiolinkContext from '~/context/biolink';
 import dragUtils from '~/utils/d3/drag';

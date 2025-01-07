@@ -3,8 +3,8 @@ import React, {
   useState, useContext, useEffect, useRef,
 } from 'react';
 import * as d3 from 'd3';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Box from '@material-ui/core/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 import BiolinkContext from '~/context/biolink';
 import kgUtils from '~/utils/knowledgeGraph';

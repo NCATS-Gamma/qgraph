@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route,
 } from 'react-router-dom';
-import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StylesProvider } from '@mui/material/styles';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 import Logout from '~/pages/Logout';

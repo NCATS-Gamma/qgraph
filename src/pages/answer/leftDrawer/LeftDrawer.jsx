@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import PublishIcon from '@material-ui/icons/Publish';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import PublishIcon from '@mui/icons-material/Publish';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 import ConfirmDialog from '~/components/ConfirmDialog';
 

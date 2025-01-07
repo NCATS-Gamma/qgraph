@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@mui/lab/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 /**
  * Generic copy-to-clipboard button

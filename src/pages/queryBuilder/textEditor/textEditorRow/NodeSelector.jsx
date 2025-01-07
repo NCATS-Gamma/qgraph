@@ -2,14 +2,14 @@ import React, {
   useState, useEffect, useContext, useMemo,
 } from 'react';
 import axios from 'axios';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
-import FileCopy from '@material-ui/icons/FileCopy';
-import Check from '@material-ui/icons/Check';
-import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core';
+import Autocomplete from '@mui/lab/Autocomplete';
+import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import FileCopy from '@mui/icons-material/FileCopy';
+import Check from '@mui/icons-material/Check';
+import Tooltip from '@mui/material/Tooltip';
+import { withStyles } from '@mui/core';
 
 import AlertContext from '~/context/alert';
 import BiolinkContext from '~/context/biolink';

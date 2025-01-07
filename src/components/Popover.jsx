@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, styled, Popover as MuiPopover } from '@material-ui/core';
+import { Paper, styled, Popover as MuiPopover } from '@mui/core';
 
 const PopoverPaper = styled(Paper)(({ theme }) => ({
   filter: 'drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3))',

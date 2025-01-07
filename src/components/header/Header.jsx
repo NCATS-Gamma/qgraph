@@ -2,15 +2,15 @@ import React, {
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { Link as MuiLink } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Popover from '@material-ui/core/Popover';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import { Link as MuiLink } from '@mui/core';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import './header.css';

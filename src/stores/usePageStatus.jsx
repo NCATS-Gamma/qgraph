@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 
-import Box from '@material-ui/core/Box';
-import Alert from '@material-ui/lab/Alert';
-import { withStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Alert from '@mui/lab/Alert';
+import { withStyles } from '@mui/material/styles';
 
 import Loading from '~/components/loading/Loading';
 

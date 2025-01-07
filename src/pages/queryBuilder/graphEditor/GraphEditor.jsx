@@ -1,9 +1,9 @@
 import React, {
   useContext, useReducer, useEffect,
 } from 'react';
-import Popover from '@material-ui/core/Popover';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import Popover from '@mui/material/Popover';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 import QueryBuilderContext from '~/context/queryBuilder';
 import nodeUtils from '~/utils/d3/nodes';
