@@ -2,7 +2,7 @@ import React, {
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { Link as MuiLink } from '@mui/core';
+import { Link as MuiLink } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';

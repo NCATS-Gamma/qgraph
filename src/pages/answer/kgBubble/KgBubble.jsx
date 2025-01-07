@@ -7,8 +7,8 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-import { List, ListItem, ListItemIcon } from '@mui/core';
-import { Brightness1 as Circle } from '@mui/icons';
+import { List, ListItem, ListItemIcon } from '@mui/material';
+import { Brightness1 as Circle } from '@mui/icons-material';
 import stringUtils from '~/utils/strings';
 import BiolinkContext from '~/context/biolink';
 import kgUtils from '~/utils/knowledgeGraph';

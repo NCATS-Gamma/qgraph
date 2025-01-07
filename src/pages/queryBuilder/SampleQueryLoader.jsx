@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import {
   Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper,
-} from '@mui/core';
-import { ArrowDropDown } from '@mui/icons';
+} from '@mui/material';
+import { ArrowDropDown } from '@mui/icons-material';
 
 import QueryBuilderContext from '~/context/queryBuilder';
 

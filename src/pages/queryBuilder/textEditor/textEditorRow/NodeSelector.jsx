@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import FileCopy from '@mui/icons-material/FileCopy';
 import Check from '@mui/icons-material/Check';
 import Tooltip from '@mui/material/Tooltip';
-import { withStyles } from '@mui/core';
+import { withStyles } from '@mui/material';
 
 import AlertContext from '~/context/alert';
 import BiolinkContext from '~/context/biolink';

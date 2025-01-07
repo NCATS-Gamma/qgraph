@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { withStyles } from '@mui/core';
+import { withStyles } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { set as idbSet } from 'idb-keyval';
 import { useAuth0 } from '@auth0/auth0-react';

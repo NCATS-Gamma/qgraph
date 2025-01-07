@@ -1,8 +1,8 @@
 import {
   Button, Card, Typography, withStyles,
-} from '@mui/core';
+} from '@mui/material';
 import { blue } from '@mui/material/colors';
-import { ArrowForward } from '@mui/icons';
+import { ArrowForward } from '@mui/icons-material';
 import React from 'react';
 
 import {
