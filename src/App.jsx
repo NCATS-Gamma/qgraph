@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route,
 } from 'react-router-dom';
-import { ThemeProvider, StylesProvider } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider, StylesProvider } from '@mui/material/styles';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 import Logout from '~/pages/Logout';
@@ -50,7 +50,7 @@ export default function App() {
   }, []);
 
   return (
-    <div id="pageContainer">
+    (<div id="pageContainer">
       <BrowserRouter basename={process.env.BASE_URL}>
         <Auth0Provider
           domain="qgraph.us.auth0.com"
@@ -60,48 +60,50 @@ export default function App() {
         >
           <AlertContext.Provider value={simpleSetAlert}>
             <BiolinkContext.Provider value={biolink}>
-              <ThemeProvider theme={theme}>
-                <StylesProvider injectFirst>
-                  <AlertWrapper
-                    alert={alert}
-                    onClose={() => simpleSetAlert(alert.severity, '')}
-                  />
-                  <Header />
-                  <div id="contentContainer">
-                    <Switch>
-                      <Route path="/about">
-                        <About />
-                      </Route>
-                      <Route path="/guide">
-                        <Guide />
-                      </Route>
-                      <Route path="/questions">
-                        <QuestionList />
-                      </Route>
-                      <Route path="/termsofservice">
-                        <TermsofService />
-                      </Route>
-                      <Route path="/logout">
-                        <Logout />
-                      </Route>
-                      <Route path="/answer/:answer_id?">
-                        <Answer />
-                      </Route>
-                      <Route path="/tutorial">
-                        <Tutorial />
-                      </Route>
-                      <Route path="/">
-                        <QueryBuilder />
-                      </Route>
-                    </Switch>
-                  </div>
-                  <Footer />
-                </StylesProvider>
-              </ThemeProvider>
+              <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={theme}>
+                  <StylesProvider injectFirst>
+                    <AlertWrapper
+                      alert={alert}
+                      onClose={() => simpleSetAlert(alert.severity, '')}
+                    />
+                    <Header />
+                    <div id="contentContainer">
+                      <Switch>
+                        <Route path="/about">
+                          <About />
+                        </Route>
+                        <Route path="/guide">
+                          <Guide />
+                        </Route>
+                        <Route path="/questions">
+                          <QuestionList />
+                        </Route>
+                        <Route path="/termsofservice">
+                          <TermsofService />
+                        </Route>
+                        <Route path="/logout">
+                          <Logout />
+                        </Route>
+                        <Route path="/answer/:answer_id?">
+                          <Answer />
+                        </Route>
+                        <Route path="/tutorial">
+                          <Tutorial />
+                        </Route>
+                        <Route path="/">
+                          <QueryBuilder />
+                        </Route>
+                      </Switch>
+                    </div>
+                    <Footer />
+                  </StylesProvider>
+                </ThemeProvider>
+              </StyledEngineProvider>
             </BiolinkContext.Provider>
           </AlertContext.Provider>
         </Auth0Provider>
       </BrowserRouter>
-    </div>
+    </div>)
   );
 }

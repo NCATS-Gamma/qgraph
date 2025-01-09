@@ -190,7 +190,7 @@ export default function NodeSelector({
   }, [properties]);
 
   return (
-    <Autocomplete
+    (<Autocomplete
       options={options}
       loading={loading}
       className={`textEditorSelector${isReference ? ' referenceNode' : ''} highlight-${id}`}
@@ -203,7 +203,7 @@ export default function NodeSelector({
       disableClearable={!clearable}
       inputValue={inputText}
       value={selectorValue}
-      getOptionSelected={(option, value) => option.name === value.name}
+      isOptionEqualToValue={(option, value) => option.name === value.name}
       open={open}
       onChange={handleUpdate}
       onOpen={() => toggleOpen(true)}
@@ -240,7 +240,7 @@ export default function NodeSelector({
         />
       )}
       size="medium"
-    />
+    />)
   );
 }
 

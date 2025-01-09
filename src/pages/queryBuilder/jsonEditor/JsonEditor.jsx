@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import ReactJsonView from 'react-json-view';
+import JsonView from 'react18-json-view';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
@@ -98,7 +98,7 @@ export default function JsonEditor({ show, close }) {
   }
 
   return (
-    <Dialog
+    (<Dialog
       open={show}
       fullWidth
       maxWidth="lg"
@@ -161,7 +161,7 @@ export default function JsonEditor({ show, close }) {
               setErrorMessages('');
               close();
             }}
-          >
+            size="large">
             <CloseIcon />
           </IconButton>
         </div>
@@ -177,7 +177,7 @@ export default function JsonEditor({ show, close }) {
                 flexGrow: 1,
               }}
             >
-              <ReactJsonView
+              <JsonView
                 name={false}
                 theme="rjv-default"
                 collapseStringsAfterLength={15}
@@ -220,6 +220,6 @@ export default function JsonEditor({ show, close }) {
           Save
         </Button>
       </DialogActions>
-    </Dialog>
+    </Dialog>)
   );
 }

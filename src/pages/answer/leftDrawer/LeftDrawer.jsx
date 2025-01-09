@@ -56,7 +56,7 @@ export default function LeftDrawer({
   }
 
   return (
-    <Drawer
+    (<Drawer
       container={document.getElementById('contentContainer')}
       variant="permanent"
       open
@@ -94,7 +94,7 @@ export default function LeftDrawer({
               style={{ fontSize: '18px' }}
               title="Download"
               disableRipple
-            >
+              size="large">
               <GetAppIcon />
             </IconButton>
           </ListItemIcon>
@@ -110,7 +110,7 @@ export default function LeftDrawer({
               style={{ fontSize: '18px' }}
               title="Upload Answer"
               disableRipple
-            >
+              size="large">
               <PublishIcon />
             </IconButton>
           </ListItemIcon>
@@ -135,7 +135,7 @@ export default function LeftDrawer({
               style={{ fontSize: '18px' }}
               title="Save Answer"
               disableRipple
-            >
+              size="large">
               <CloudUploadIcon />
             </IconButton>
           </ListItemIcon>
@@ -153,7 +153,7 @@ export default function LeftDrawer({
               style={{ fontSize: '18px' }}
               title="Delete Answer"
               disableRipple
-            >
+              size="large">
               <HighlightOffIcon />
             </IconButton>
           </ListItemIcon>
@@ -171,6 +171,6 @@ export default function LeftDrawer({
         title="Confirm Answer Deletion"
         confirmText="Delete Answer"
       />
-    </Drawer>
+    </Drawer>)
   );
 }

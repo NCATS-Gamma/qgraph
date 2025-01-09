@@ -119,7 +119,7 @@ export default function QuestionTableRow({ question, onQuestionUpdated }) {
   }
 
   return (
-    <TableRow
+    (<TableRow
       key={question.id}
       onClick={getAnswers}
       hover
@@ -162,7 +162,7 @@ export default function QuestionTableRow({ question, onQuestionUpdated }) {
               e.stopPropagation();
               setConfirmOpen(true);
             }}
-          >
+            size="large">
             <DeleteForeverIcon />
           </IconButton>
         </TableCell>
@@ -181,6 +181,6 @@ export default function QuestionTableRow({ question, onQuestionUpdated }) {
         title="Confirm Question Deletion"
         confirmText="Delete Question"
       />
-    </TableRow>
+    </TableRow>)
   );
 }

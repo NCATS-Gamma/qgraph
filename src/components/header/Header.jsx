@@ -24,7 +24,7 @@ export default function Header() {
   } = useAuth0();
 
   return (
-    <AppBar position="relative" className="header">
+    (<AppBar position="relative" className="header">
       <Toolbar id="headerToolbar">
         <MuiLink href="/" style={{ cursor: 'pointer', margin: 0 }}><Logo height="48px" width="100%" style={{ paddingTop: '6px' }} /></MuiLink>
         <div className="grow" />
@@ -41,7 +41,7 @@ export default function Header() {
           )}
           fontSize="large"
           aria-label="signinButton"
-        >
+          size="large">
           {isAuthenticated ? (
             <AccountCircle id="signedInIcon" fontSize="large" />
           ) : (
@@ -58,6 +58,6 @@ export default function Header() {
           <Button onClick={() => logout({ returnTo: `${window.location.origin}/logout` })}>Sign Out</Button>
         </Popover>
       </Toolbar>
-    </AppBar>
+    </AppBar>)
   );
 }

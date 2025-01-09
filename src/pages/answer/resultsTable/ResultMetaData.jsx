@@ -41,7 +41,7 @@ export default function ResultMetaData({ metaData, result }) {
   const hasSupportPublications = useMemo(() => !!Object.values(metaData).find((pubs) => pubs.length), [metaData]);
 
   return (
-    <Paper
+    (<Paper
       id="resultMetaData"
       elevation={3}
     >
@@ -96,9 +96,7 @@ export default function ResultMetaData({ metaData, result }) {
         <h4>
           Result JSON
           &nbsp;
-          <IconButton
-            onClick={() => toggleJSONVisibility(!showJSON)}
-          >
+          <IconButton onClick={() => toggleJSONVisibility(!showJSON)} size="large">
             {!showJSON ? (
               <ExpandMore />
             ) : (
@@ -110,6 +108,6 @@ export default function ResultMetaData({ metaData, result }) {
           <pre id="resultJSONContainer">{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
-    </Paper>
+    </Paper>)
   );
 }

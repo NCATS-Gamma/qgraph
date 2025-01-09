@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-import 'react-widgets/dist/css/react-widgets.css';
+import 'react-widgets/styles.css';
 
 import App from './App';
 

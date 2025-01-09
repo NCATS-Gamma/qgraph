@@ -32,14 +32,14 @@ export default function TextEditorRow({ row, index }) {
   }
 
   return (
-    <div
+    (<div
       className="textEditorRow"
     >
       <IconButton
         onClick={deleteEdge}
         className="textEditorIconButton"
         disabled={queryBuilder.textEditorRows.length < 2}
-      >
+        size="large">
         <IndeterminateCheckBoxOutlinedIcon />
       </IconButton>
       <p>
@@ -88,12 +88,9 @@ export default function TextEditorRow({ row, index }) {
           ).map((key) => ({ ...query_graph.nodes[key], key })),
         }}
       />
-      <IconButton
-        onClick={addHop}
-        className="textEditorIconButton"
-      >
+      <IconButton onClick={addHop} className="textEditorIconButton" size="large">
         <AddBoxOutlinedIcon />
       </IconButton>
-    </div>
+    </div>)
   );
 }

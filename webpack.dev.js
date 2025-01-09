@@ -15,7 +15,7 @@ module.exports = merge(common, {
     hot: hotReload,
     inline: hotReload,
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   mode: 'development',
   module: {
     rules: [
