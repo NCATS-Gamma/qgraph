@@ -35,7 +35,11 @@ export default function DownloadDialog({
       blob = new Blob([JSON.stringify({ message }, null, 2)], { type: 'application/json' });
     }
     if (type === 'csv') {
-      const subsetMessage = message.results.map((r) => [...Object.values(r.node_bindings).map((nb) => nb[0].id), r.score]);
+      const subsetMessage = message.results.map((r) => [
+        ...Object.values(r.node_bindings).map((nb) => {
+          const node = message.knowledge_graph.nodes[nb[0].id];
+          return node.name || node.categories[0];
+        }), r.score]);
       const csvString = await jsonToCsvString(subsetMessage);
       blob = new Blob([csvString], { type: 'text/csv' });
     }
