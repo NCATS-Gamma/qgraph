@@ -30,8 +30,9 @@ const ValueCell = ({ value }) => (
 const PublicationLinkCell = ({ value }) => {
   const getLinkFromValue = (pmidValue) => {
     const pmid = pmidValue.split(':');
-    if (pmid.length < 2) return null;
-    return `https://pubmed.ncbi.nlm.nih.gov/${pmid[1]}/`;
+    if (pmid.length !== 2) return null;
+    // eslint-disable-next-line no-nested-ternary
+    return pmid[0] === 'PMC' ? `https://pmc.ncbi.nlm.nih.gov/articles/${pmid[0]}${pmid[1]}/` : pmid[0] === 'PMID' ? `https://pubmed.ncbi.nlm.nih.gov/${pmid[1]}/` : null;
   };
 
   return (
