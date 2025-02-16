@@ -19,6 +19,27 @@ const jsonToCsvString = (json) => new Promise((res, rej) => {
   });
 });
 
+const constructCsvObj = (message) => {
+  const nodeLabelHeaders = Object.keys(
+    message.results[0].node_bindings,
+  ).flatMap((node_label) => [`${node_label} (Name)`, `${node_label} (CURIE)`]);
+  const header = [...nodeLabelHeaders, 'Score'];
+
+  const body = message.results.map((result) => {
+    const row = [];
+    Object.values(result.node_bindings).forEach((nb) => {
+      const curie = nb[0].id;
+      const node = message.knowledge_graph.nodes[curie];
+      row.push(node.name || node.categories[0]);
+      row.push(curie);
+    });
+    row.push(result.score);
+    return row;
+  });
+
+  return [header, ...body];
+};
+
 export default function DownloadDialog({
   open, setOpen, message,
 }) {
@@ -35,12 +56,7 @@ export default function DownloadDialog({
       blob = new Blob([JSON.stringify({ message }, null, 2)], { type: 'application/json' });
     }
     if (type === 'csv') {
-      const subsetMessage = message.results.map((r) => [
-        ...Object.values(r.node_bindings).map((nb) => {
-          const node = message.knowledge_graph.nodes[nb[0].id];
-          return node.name || node.categories[0];
-        }), r.score]);
-      const csvString = await jsonToCsvString(subsetMessage);
+      const csvString = await jsonToCsvString(constructCsvObj(message));
       blob = new Blob([csvString], { type: 'text/csv' });
     }
 
