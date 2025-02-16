@@ -19,11 +19,32 @@ const jsonToCsvString = (json) => new Promise((res, rej) => {
   });
 });
 
+const constructPmidOrPmcLink = (id) => {
+  if (id.startsWith('PMID')) {
+    return `https://pubmed.ncbi.nlm.nih.gov/${id.split(':')[1]}`;
+  }
+  if (id.startsWith('PMC')) {
+    return `https://pmc.ncbi.nlm.nih.gov/articles/${id.split(':')[1]}`;
+  }
+  return '';
+};
+
+const getConcatPublicationsForResult = (result, message) => {
+  const edgeIds = Object.values(result.analyses[0].edge_bindings)
+    .flat()
+    .map((e) => e.id);
+  const publications = edgeIds.flatMap((edgeId) => message.knowledge_graph.edges[edgeId].attributes.filter(
+    (attr) => attr.attribute_type_id === 'biolink:publications',
+  ).flatMap((attr) => attr.value)).map(constructPmidOrPmcLink);
+
+  return publications;
+};
+
 const constructCsvObj = (message) => {
   const nodeLabelHeaders = Object.keys(
     message.results[0].node_bindings,
   ).flatMap((node_label) => [`${node_label} (Name)`, `${node_label} (CURIE)`]);
-  const header = [...nodeLabelHeaders, 'Score'];
+  const header = [...nodeLabelHeaders, 'Score', 'Publications'];
 
   const body = message.results.map((result) => {
     const row = [];
@@ -34,6 +55,8 @@ const constructCsvObj = (message) => {
       row.push(curie);
     });
     row.push(result.score);
+    row.push(getConcatPublicationsForResult(result, message).join('\n'));
+
     return row;
   });
 
