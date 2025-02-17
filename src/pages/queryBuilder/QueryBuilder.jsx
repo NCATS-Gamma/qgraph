@@ -17,9 +17,9 @@ import useQueryBuilder from './useQueryBuilder';
 import GraphEditor from './graphEditor/GraphEditor';
 import TextEditor from './textEditor/TextEditor';
 import JsonEditor from './jsonEditor/JsonEditor';
+import TemplatedQueriesModal from './templatedQueries/TemplatedQueriesModal';
 
 import './queryBuilder.css';
-import SampleQueryLoader from './SampleQueryLoader';
 
 const SubmitButton = withStyles((theme) => ({
   root: {
@@ -45,6 +45,7 @@ export default function QueryBuilder() {
   const displayAlert = useContext(AlertContext);
   const history = useHistory();
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [exampleQueriesOpen, setExampleQueriesOpen] = useState(false);
 
   /**
    * Submit this query directly to an ARA and then navigate to the answer page
@@ -184,13 +185,25 @@ export default function QueryBuilder() {
         <div id="queryBuilderContainer">
           <div id="queryEditorContainer">
             <QueryBuilderContext.Provider value={queryBuilder}>
-              <TextEditor
-                rows={queryBuilder.textEditorRows}
-              />
+              <div style={{ flex: 1 }}>
+                <TextEditor
+                  rows={queryBuilder.textEditorRows}
+                />
+              </div>
               <div>
                 <GraphEditor />
                 <div id="queryBuilderButtons">
-                  <SampleQueryLoader />
+                  <Button
+                    onClick={() => setExampleQueriesOpen(true)}
+                    variant="outlined"
+                  >
+                    Load Example
+                  </Button>
+                  <TemplatedQueriesModal
+                    open={exampleQueriesOpen}
+                    setOpen={setExampleQueriesOpen}
+                  />
+
                   <Button
                     onClick={() => toggleJson(true)}
                     variant="outlined"
