@@ -17,10 +17,9 @@ import useQueryBuilder from './useQueryBuilder';
 import GraphEditor from './graphEditor/GraphEditor';
 import TextEditor from './textEditor/TextEditor';
 import JsonEditor from './jsonEditor/JsonEditor';
+import TemplatedQueriesModal from './templatedQueries/TemplatedQueriesModal';
 
 import './queryBuilder.css';
-import TemplatedQueriesModal from './templatedQueries/TemplatedQueriesModal';
-import TemplatedQueries from './templatedQueries/TemplatedQueries';
 
 const SubmitButton = withStyles((theme) => ({
   root: {
@@ -187,7 +186,6 @@ export default function QueryBuilder() {
           <div id="queryEditorContainer">
             <QueryBuilderContext.Provider value={queryBuilder}>
               <div style={{ flex: 1 }}>
-                <TemplatedQueries />
                 <TextEditor
                   rows={queryBuilder.textEditorRows}
                 />
