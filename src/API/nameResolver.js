@@ -6,13 +6,14 @@ const baseRoutes = {
   /**
    * Look up possible entities using a search string
    */
-  async entityLookup(search_string, limit, cancel) {
+  async entityLookup(search_string, limit, cancel, type) {
     const config = {
       headers: {
         'Content-Type': 'text/plain',
       },
       params: {
         string: search_string,
+        type,
         limit,
       },
       cancelToken: cancel,

@@ -53,6 +53,7 @@ let cancel;
  * @param {function} update - function to update node properties
  * @param {string} title - title of the select box (if not specified, id is used)
  * @param {string} size - size of the select box
+ * @param {string} nameresCategoryFilter - biolink category to filter the nameres options
  * @param {object} nodeOptions
  * @param {boolean} nodeOptions.includeCuries - node selector can include curies for a new node
  * @param {boolean} nodeOptions.includeExistingNodes - node selector can include existing nodes
@@ -60,7 +61,7 @@ let cancel;
  */
 export default function NodeSelector({
   id, properties, isReference,
-  setReference, update, title, size,
+  setReference, update, title, size, nameresCategoryFilter,
   options: nodeOptions = {},
 }) {
   const {
@@ -127,7 +128,7 @@ export default function NodeSelector({
         cancel.cancel();
       }
       cancel = CancelToken.source();
-      const curies = await fetchCuries(searchTerm, displayAlert, cancel.token);
+      const curies = await fetchCuries(searchTerm, displayAlert, cancel.token, nameresCategoryFilter);
       newOptions.push(...curies);
     }
     toggleLoading(false);

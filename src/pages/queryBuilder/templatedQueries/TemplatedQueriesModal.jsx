@@ -183,6 +183,7 @@ export default function TemplatedQueriesModal({
                           title={part.name}
                           size="small"
                           properties={queryBuilder.query_graph.nodes[part.id]}
+                          nameresCategoryFilter={part.filterType}
                           update={editNode}
                           options={{
                             includeCuries: true,

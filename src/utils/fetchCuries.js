@@ -1,8 +1,8 @@
 import API from '~/API';
 
-export default async function fetchCuries(entity, displayAlert, cancel) {
+export default async function fetchCuries(entity, displayAlert, cancel, biolinkType) {
   // Get list of curies that match this search term
-  const response = await API.nameResolver.entityLookup(entity, 1000, cancel);
+  const response = await API.nameResolver.entityLookup(entity, 1000, cancel, biolinkType);
   if (response.status === 'error') {
     displayAlert('error',
       'Failed to contact name resolver to search curies. Please try again later.');
