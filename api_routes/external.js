@@ -26,6 +26,7 @@ router.route('/name_resolver')
       },
       params: {
         string: req.query.string,
+        biolink_type: req.query.type,
         limit: req.query.limit,
       },
     };

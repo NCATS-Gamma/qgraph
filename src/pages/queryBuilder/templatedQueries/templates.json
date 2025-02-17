@@ -1,0 +1,238 @@
+[
+  {
+    "type": "template",
+    "tags": "AOP",
+    "template": [
+      {
+        "type": "text",
+        "text": "What adverse outcome pathways (AOPs) may explain the relationship between "
+      },
+      {
+        "type": "node",
+        "id": "n0",
+        "name": "chemical exposure",
+        "filterType": "biolink:ChemicalEntity"
+      },
+      {
+        "type": "text",
+        "text": " and "
+      },
+      {
+        "type": "node",
+        "id": "n4",
+        "name": "disease",
+        "filterType": "biolink:Disease"
+      },
+      {
+        "type": "text",
+        "text": "?"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        },
+        "n2": {
+          "name": "Biological Process",
+          "category": "biolink:BiologicalProcessOrActivity"
+        },
+        "n3": {
+          "name": "Phenotypic Feature",
+          "category": "biolink:PhenotypicFeature"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        },
+        "e3": {
+          "subject": "n2",
+          "object": "n3",
+          "predicate": "biolink:related_to"
+        },
+        "e4": {
+          "subject": "n3",
+          "object": "n4",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "template",
+    "tags": "COP",
+    "template": [
+      {
+        "type": "text",
+        "text": "What clinical outcome pathways (COPs) may explain the relationship between "
+      },
+      {
+        "type": "node",
+        "id": "n0",
+        "name": "drug",
+        "filterType": "biolink:Drug"
+      },
+      {
+        "type": "text",
+        "text": " and "
+      },
+      {
+        "type": "node",
+        "id": "n4",
+        "name": "disease",
+        "filterType": "biolink:Disease"
+      },
+      {
+        "type": "text",
+        "text": "?"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        },
+        "n2": {
+          "name": "Biological Process",
+          "category": "biolink:BiologicalProcessOrActivity"
+        },
+        "n3": {
+          "name": "Phenotypic Feature",
+          "category": "biolink:PhenotypicFeature"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        },
+        "e3": {
+          "subject": "n2",
+          "object": "n3",
+          "predicate": "biolink:related_to"
+        },
+        "e4": {
+          "subject": "n3",
+          "object": "n4",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "template",
+    "tags": "AOP",
+    "template": [
+      {
+        "type": "text",
+        "text": "What genes may relate "
+      },
+      {
+        "type": "node",
+        "id": "n0",
+        "name": "chemical exposure",
+        "filterType": "biolink:ChemicalEntity"
+      },
+      {
+        "type": "text",
+        "text": " and "
+      },
+      {
+        "type": "node",
+        "id": "n2",
+        "name": "disease",
+        "filterType": "biolink:Disease"
+      },
+      {
+        "type": "text",
+        "text": "?"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "template",
+    "tags": "COP",
+    "template": [
+      {
+        "type": "text",
+        "text": "What genes may relate "
+      },
+      {
+        "type": "node",
+        "id": "n0",
+        "name": "drug",
+        "filterType": "biolink:Drug"
+      },
+      {
+        "type": "text",
+        "text": " and "
+      },
+      {
+        "type": "node",
+        "id": "n2",
+        "name": "disease",
+        "filterType": "biolink:Disease"
+      },
+      {
+        "type": "text",
+        "text": "?"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  }
+]
