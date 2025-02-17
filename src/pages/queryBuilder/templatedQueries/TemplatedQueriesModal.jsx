@@ -64,7 +64,7 @@ function exampleToTrapiFormat(example) {
     .reduce((obj, { id }) => ({ ...obj, [id]: { categories: [] } }), {});
 
   const structureNodes = Object.entries(example.structure.nodes)
-    .reduce((obj, [id, n]) => ({ ...obj, [id]: { categories: [n.category], name: n.name } }), {});
+    .reduce((obj, [id, n]) => ({ ...obj, [id]: { categories: [n.category], name: n.name, ...(n.id && { ids: [n.id] }) } }), {});
 
   const nodesSortedById = Object.entries({ ...templateNodes, ...structureNodes })
     .sort(([a], [b]) => a.localeCompare(b))
@@ -136,7 +136,7 @@ export default function TemplatedQueriesModal({
               <ListItemText
                 primary={(
                   <>
-                    <Chip size="small" label={example.tags} />{' '}
+                    {example.tags && (<><Chip size="small" label={example.tags} />{' '}</>) }
                     {createTemplateDisplay(example.template)}
                   </>
                 )}

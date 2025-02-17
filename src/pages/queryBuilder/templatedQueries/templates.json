@@ -234,5 +234,173 @@
         }
       }
     }
+  },
+  {
+    "type": "example",
+    "template": [
+      {
+        "type": "text",
+        "text": "Chemicals that might ameliorate Huntington's Disease"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n0": {
+          "name": "Chemical Entity",
+          "category": "biolink:ChemicalEntity"
+        },
+        "n1": {
+          "name": "Huntington disease",
+          "category": "biolink:Disease",
+          "id": "MONDO:0007739"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:treats"
+        }
+      }
+    }
+  },
+  {
+    "type": "example",
+    "template": [
+      {
+        "type": "text",
+        "text": "Chemicals that interact with a gene related to Castleman disease"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n0": {
+          "name": "Chemical Entity",
+          "category": "biolink:ChemicalEntity"
+        },
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        },
+        "n2": {
+          "name": "Castleman disease",
+          "category": "biolink:DiseaseOrPhenotypicFeature",
+          "id": "MONDO:0015564"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:interacts_with"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "example",
+    "template": [
+      {
+        "type": "text",
+        "text": "Genes involved in histone H3 deacetylation"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n0": {
+          "name": "histone H3 deacetylation",
+          "category": "biolink:BiologicalProcessOrActivity",
+          "id": "GO:0070932"
+        },
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "example",
+    "template": [
+      {
+        "type": "text",
+        "text": "Genes and chemicals related to GLUT 1 deficiency, and to each other"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n0": {
+          "name": "Chemical Entity",
+          "category": "biolink:ChemicalEntity"
+        },
+        "n1": {
+          "name": "Gene",
+          "category": "biolink:Gene"
+        },
+        "n2": {
+          "name": "GLUT 1 deficiency syndrome",
+          "category": "biolink:DiseaseOrPhenotypicFeature",
+          "id": "MONDO:0000188"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:related_to"
+        },
+        "e1": {
+          "subject": "n1",
+          "object": "n2",
+          "predicate": "biolink:related_to"
+        },
+        "e2": {
+          "subject": "n2",
+          "object": "n0",
+          "predicate": "biolink:related_to"
+        }
+      }
+    }
+  },
+  {
+    "type": "example",
+    "template": [
+      {
+        "type": "text",
+        "text": "Diseases associated with 2,3,7,8-tetrochlorodibenzo-p-dioxin"
+      }
+    ],
+    "structure": {
+      "nodes": {
+        "n0": {
+          "name": "2,3,7,8-tetrochlorodibenzo-p-dioxin",
+          "category": "biolink:MolecularEntity",
+          "id": "PUBCHEM.COMPOUND:15625"
+        },
+        "n1": {
+          "name": "Disease",
+          "category": "biolink:Disease"
+        }
+      },
+      "edges": {
+        "e0": {
+          "subject": "n0",
+          "object": "n1",
+          "predicate": "biolink:associated_with"
+        }
+      }
+    }
   }
 ]
