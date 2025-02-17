@@ -6,6 +6,7 @@ import React, { useContext, useState } from 'react';
 import { Close } from '@material-ui/icons';
 import QueryBuilderContext from '~/context/queryBuilder';
 import examples from './templates.json';
+import NodeSelector from '../textEditor/textEditorRow/NodeSelector';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -102,6 +103,10 @@ export default function TemplatedQueriesModal({
     queryBuilder.dispatch({ type: 'saveGraph', payload });
   };
 
+  const editNode = (id, node) => {
+    queryBuilder.dispatch({ type: 'editNode', payload: { id, node } });
+  };
+
   return (
     <Modal open={open} onClose={handleClose} className={classes.modal}>
       <div className={classes.paper}>
@@ -159,10 +164,34 @@ export default function TemplatedQueriesModal({
                 ? <PleaseSelectAnExampleText />
                 : selectedExample.template.map((part, i) => {
                   if (part.type === 'text') {
-                    return <span key={i}>{part.text}</span>;
+                    return <span key={i} style={{ fontSize: '16px' }}>{part.text}</span>;
                   }
                   if (part.type === 'node') {
-                    return <code key={i}>{part.name}</code>;
+                    return (
+                      <div
+                        key={i}
+                        style={{
+                          maxWidth: '300px',
+                          display: 'inline-flex',
+                          transform: 'translateY(-16px)',
+                          marginLeft: '-1ch',
+                          marginRight: '-1ch',
+                        }}
+                      >
+                        <NodeSelector
+                          id={part.id}
+                          title={part.name}
+                          size="small"
+                          properties={queryBuilder.query_graph.nodes[part.id]}
+                          update={editNode}
+                          options={{
+                            includeCuries: true,
+                            includeCategories: false,
+                            includeExistingNodes: false,
+                          }}
+                        />
+                      </div>
+                    );
                   }
                   return null;
                 })

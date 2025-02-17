@@ -51,6 +51,8 @@ let cancel;
  * @param {boolean} isReference - is the node a reference
  * @param {function} setReference - function to set node selector reference
  * @param {function} update - function to update node properties
+ * @param {string} title - title of the select box (if not specified, id is used)
+ * @param {string} size - size of the select box
  * @param {object} nodeOptions
  * @param {boolean} nodeOptions.includeCuries - node selector can include curies for a new node
  * @param {boolean} nodeOptions.includeExistingNodes - node selector can include existing nodes
@@ -58,7 +60,7 @@ let cancel;
  */
 export default function NodeSelector({
   id, properties, isReference,
-  setReference, update,
+  setReference, update, title, size,
   options: nodeOptions = {},
 }) {
   const {
@@ -231,7 +233,7 @@ export default function NodeSelector({
           {...params}
           variant="outlined"
           className="nodeDropdown"
-          label={id}
+          label={title || id}
           margin="dense"
           onFocus={() => {
             highlighter.highlightGraphNode(id);
@@ -255,7 +257,7 @@ export default function NodeSelector({
           }}
         />
       )}
-      size="medium"
+      size={size || 'medium'}
     />
   );
 }
