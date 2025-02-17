@@ -1,9 +1,10 @@
 import {
   Button,
-  Chip, Divider, List, ListItem, ListItemText, ListSubheader, Modal, makeStyles,
+  Chip, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Modal, makeStyles,
 } from '@material-ui/core';
-import React from 'react';
-
+import React, { useContext, useState } from 'react';
+import { Close } from '@material-ui/icons';
+import QueryBuilderContext from '~/context/queryBuilder';
 import examples from './templates.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,14 +40,70 @@ function createTemplateDisplay(template) {
   );
 }
 
+function PleaseSelectAnExampleText() {
+  return (
+    <div style={{
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '2.5rem',
+      fontStyle: 'italic',
+      color: '#acacac',
+    }}
+    >
+      Please select an example from the list
+    </div>
+  );
+}
+
+function exampleToTrapiFormat(example) {
+  const templateNodes = example.template
+    .filter((part) => part.type === 'node')
+    .reduce((obj, { id }) => ({ ...obj, [id]: { categories: [] } }), {});
+
+  const structureNodes = Object.entries(example.structure.nodes)
+    .reduce((obj, [id, n]) => ({ ...obj, [id]: { categories: [n.category], name: n.name } }), {});
+
+  const nodesSortedById = Object.entries({ ...templateNodes, ...structureNodes })
+    .sort(([a], [b]) => a.localeCompare(b))
+    .reduce((obj, [id, n]) => ({ ...obj, [id]: n }), {});
+
+  const edges = Object.entries(example.structure.edges)
+    .reduce((obj, [id, e]) => ({ ...obj, [id]: { subject: e.subject, object: e.object, predicates: [e.predicate] } }), {});
+
+  return {
+    message: {
+      query_graph: {
+        nodes: nodesSortedById,
+        edges,
+      },
+    },
+  };
+}
+
 export default function TemplatedQueriesModal({
   open,
   setOpen,
 }) {
   const classes = useStyles();
+  const queryBuilder = useContext(QueryBuilderContext);
+
+  const [selectedExample, setSelectedExample] = useState(null);
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedExample(null);
+  };
+
+  const handleSelectExample = (example) => {
+    setSelectedExample(example);
+    const payload = exampleToTrapiFormat(example);
+    queryBuilder.dispatch({ type: 'saveGraph', payload });
+  };
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)} className={classes.modal}>
+    <Modal open={open} onClose={handleClose} className={classes.modal}>
       <div className={classes.paper}>
         <List
           style={{ flexBasis: 350, overflowY: 'auto' }}
@@ -68,7 +125,7 @@ export default function TemplatedQueriesModal({
               divider
               key={i}
               onClick={() => {
-                console.log(example);
+                handleSelectExample(example);
               }}
             >
               <ListItemText
@@ -89,15 +146,30 @@ export default function TemplatedQueriesModal({
             flex: '1',
             padding: '1rem',
             flexDirection: 'column',
-            gap: '1rem',
           }}
         >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <IconButton size="small" onClick={handleClose}>
+              <Close />
+            </IconButton>
+          </div>
           <div style={{ flex: '1' }}>
-            <h3>Template query!</h3>
-            <p>Template query extra details</p>
+            {
+              selectedExample === null
+                ? <PleaseSelectAnExampleText />
+                : selectedExample.template.map((part, i) => {
+                  if (part.type === 'text') {
+                    return <span key={i}>{part.text}</span>;
+                  }
+                  if (part.type === 'node') {
+                    return <code key={i}>{part.name}</code>;
+                  }
+                  return null;
+                })
+            }
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <Button variant="contained" color="primary" onClick={() => setOpen(false)}>
+            <Button variant="contained" color="primary" onClick={handleClose}>
               Done
             </Button>
           </div>
